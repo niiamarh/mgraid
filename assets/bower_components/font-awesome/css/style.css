@@ -101,6 +101,15 @@ h1 {
     color: #fff;
     margin-bottom: 1em;
 }
+.main-png {
+	background: url('../images/mgraid4.png');
+	background-size: contain;
+	background-position: center;
+	margin: auto;
+	margin-bottom: 20px;
+	height: 82px;
+	width: 230px;
+}
 .wthree li {
     display: inline-block;
 }

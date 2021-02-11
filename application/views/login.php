@@ -32,8 +32,7 @@
  <div class="bg-layer">
   <h1>Login</h1>
   <div class="header-main">
-    <div class="main-icon">
-			<span class="fa fa-eercast"></span>
+    <div class="main-png" style="text-align:center;">
 		</div>
 
     <?php echo validation_errors(); ?>
