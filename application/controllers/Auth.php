@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Auth extends Admin_Controller 
+class Auth extends Admin_Controller
 {
 
 	public function __construct()
@@ -12,7 +12,7 @@ class Auth extends Admin_Controller
 		$this->load->model('model_auth');
 	}
 
-	/* 
+	/*
 		Check if the login form is submitted, and validates the user credential
 		If not submitted it redirects to the login page
 	*/
@@ -37,6 +37,7 @@ class Auth extends Admin_Controller
            				'id' => $login['id'],
 				        'username'  => $login['username'],
 				        'email'     => $login['email'],
+								'group_id' => $login['group_id'],
 				        'logged_in' => TRUE
 					);
 
@@ -44,7 +45,7 @@ class Auth extends Admin_Controller
            			redirect('dashboard', 'refresh');
            		}
            		else {
-           			$this->data['errors'] = 'Incorrect username/password combination';
+           			$this->data['errors'] = 'Invalid username or password';
            			$this->load->view('login', $this->data);
            		}
            	}
@@ -52,12 +53,12 @@ class Auth extends Admin_Controller
            		$this->data['errors'] = 'Email does not exists';
 
            		$this->load->view('login', $this->data);
-           	}	
+           	}
         }
         else {
             // false case
             $this->load->view('login');
-        }	
+        }
 	}
 
 	/*

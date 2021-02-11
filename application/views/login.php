@@ -35,11 +35,13 @@
     <div class="main-png" style="text-align:center;">
 		</div>
 
+<div style="text-align=center; color=red;">
     <?php echo validation_errors(); ?>
 
     <?php if(!empty($errors)) {
       echo $errors;
     } ?>
+    </div>
     <div class="header-left-bottom">
       <form action="<?php echo base_url('auth/login') ?>" method="post">
         <div class="icon1">

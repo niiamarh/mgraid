@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class MY_Controller extends CI_Controller
 {
@@ -8,11 +8,11 @@ class MY_Controller extends CI_Controller
 	}
 }
 
-class Admin_Controller extends MY_Controller 
+class Admin_Controller extends MY_Controller
 {
 	var $permission = array();
 
-	public function __construct() 
+	public function __construct()
 	{
 		parent::__construct();
 
@@ -22,10 +22,10 @@ class Admin_Controller extends MY_Controller
 			$this->session->set_userdata($session_data);
 		}
 		else {
-			$user_id = $this->session->userdata('id');
+			$group_id = $this->session->userdata('group_id');
 			$this->load->model('model_groups');
-			$group_data = $this->model_groups->getUserGroupByUserId($user_id);
-			
+			$group_data = $this->model_groups->getUserGroupByUserId($group_id);
+
 			$this->data['user_permission'] = unserialize($group_data['permission']);
 			$this->permission = unserialize($group_data['permission']);
 		}
@@ -62,7 +62,7 @@ class Admin_Controller extends MY_Controller
 		$this->load->model('model_company');
 		$company_currency = $this->model_company->getCompanyData(1);
 		$currencies = $this->currency();
-			
+
 		$currency = '';
 		foreach ($currencies as $key => $value) {
 			if($key == $company_currency['currency']) {
@@ -74,7 +74,7 @@ class Admin_Controller extends MY_Controller
 
 	}
 
-	
+
 	public function currency()
 	{
 		return $currency_symbols = array(

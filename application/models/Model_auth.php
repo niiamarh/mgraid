@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class Model_auth extends CI_Model
 {
@@ -7,13 +7,15 @@ class Model_auth extends CI_Model
 		parent::__construct();
 	}
 
-	/* 
+	/*
 		This function checks if the email exists in the database
 	*/
-	public function check_email($email) 
+	public function check_email($email)
 	{
 		if($email) {
-			$sql = 'SELECT * FROM users WHERE email = ?';
+			$sql = 'SELECT * FROM users
+			JOIN user_group ON users.id = user_group.user_id
+			WHERE email = ?';
 			$query = $this->db->query($sql, array($email));
 			$result = $query->num_rows();
 			return ($result == 1) ? true : false;
@@ -22,26 +24,29 @@ class Model_auth extends CI_Model
 		return false;
 	}
 
-	/* 
+	/*
 		This function checks if the email and password matches with the database
 	*/
 	public function login($email, $password) {
 		if($email && $password) {
-			$sql = "SELECT * FROM users WHERE email = ?";
+			$sql = "SELECT * FROM users
+			JOIN user_group ON users.id = user_group.user_id
+			WHERE email = ?";
 			$query = $this->db->query($sql, array($email));
 
 			if($query->num_rows() == 1) {
 				$result = $query->row_array();
+				$group_id = $result['group_id'];
 
 				$hash_password = password_verify($password, $result['password']);
 				if($hash_password === true) {
-					return $result;	
+					return $result;
 				}
 				else {
 					return false;
 				}
 
-				
+
 			}
 			else {
 				return false;
